@@ -11,16 +11,10 @@ public class TaskRepository <T extends Task> {
     }
 
     public void delete(Integer id) throws TaskNotFoundException {
-        boolean exists = false;
-            for(T task : tasks){
-                if(task.getId().equals(id)){
-                    exists = true;
-                    tasks.remove(task);
-                }
-            }
-            if(!exists){
-                throw new TaskNotFoundException("Task with id" + id + "not found!");
-            }
+        boolean removed = tasks.removeIf(task -> task.getId().equals(id));
+        if (!removed) {
+            throw new TaskNotFoundException("Task with id " + id + " not found!");
+        }
     }
 
     public Optional<Task> findById(Integer id){
@@ -36,5 +30,9 @@ public class TaskRepository <T extends Task> {
 
     public List<T> findAll(){
         return tasks;
+    }
+
+    public void numUser(){
+        System.out.println(Task.getCountUser());
     }
 }

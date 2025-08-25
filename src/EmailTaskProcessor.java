@@ -6,7 +6,7 @@ public class EmailTaskProcessor extends AbstractTaskProcessor {
         if(task instanceof DeadlineTask){
             DeadlineTask deadlineTask = (DeadlineTask) task;
             if(deadlineTask.getDeadline().isBefore(LocalDateTime.now())){
-                System.out.println("DEADLINE KECIB TASKA VAXTINDA BAXMAQ LAZIMDI");
+                System.out.println("The task deadline has already passed.");
                 return;
             }
         }

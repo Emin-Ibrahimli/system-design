@@ -8,7 +8,7 @@ public class Task {
     private LocalDateTime created;
     private boolean isCompleted;
     private TaskStatus status;
-    private static ImmutableUser[] users;
+    private static ImmutableUser[] users = new ImmutableUser[100];
     private static int countUser= 0;
 
     public Task(Integer id, String title, String description, LocalDateTime created, boolean isCompleted, TaskStatus status) {
@@ -68,9 +68,29 @@ public class Task {
         this.status = status;
     }
 
-    public static void addUser(ImmutableUser user){
-
+    public static ImmutableUser[] getUsers() {
+        return users;
     }
+
+    public static void setUsers(ImmutableUser[] users) {
+        Task.users = users;
+    }
+
+    public static int getCountUser() {
+        return countUser;
+    }
+
+    public static void setCountUser(int countUser) {
+        Task.countUser = countUser;
+    }
+
+    public static void addUser(ImmutableUser user){
+        if (user != null) {
+            users[countUser] = user;
+            countUser++;
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
